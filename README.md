@@ -61,11 +61,13 @@ def main():
 - The transformation step of this process is covered in the rest of the exercise. Assuming that the data provided is representative of what was extracted then pandas would be sufficient.
 
 ### Load
-- Since the lab data will need to be used
+- Since the lab data will need to be used in reporting, monitoring, and studies it's ideal that it be accessable through a database t
 
 ### Workflow
 - Scheduling
+ - Airflow
 - Modeling
+ - dbt (data build tool)
 
 ## Instructions
 
