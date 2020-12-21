@@ -1,12 +1,12 @@
 # Data Engineering Exercise for Biobot
 
-![biobot](https://github.com/william-cass-wright/biobot_data_eng_exercise/blob/master/image/logo.png)
+![biobot](https://github.com/william-cass-wright/biobot_data_eng_exercise/blob/master/images/logo.png)
 
 ## Table of Contents
 
-- Responses
-- Instructions
-- References
+- [Responses](README.md#responses)
+- [Instructions](README.md#instructions)
+- [References](README.md#references)
 
 ## Responses
 
@@ -59,18 +59,43 @@ def main():
 
 ### Transform
 - The transformation step of this process is covered in the rest of the exercise. Assuming that the data provided is representative of what was extracted then pandas would be sufficient.
+- A few things I would add given more time:
+	- replace print statements with logging
+	- parameterize things like column and file names
+	- make executable via bash script
+	- add edge case testing to account for expected variability in lab data
+	- orgaize code into class with OOP naming conventions
 
 ### Load
-- Since the lab data will need to be used in reporting, monitoring, and studies it's ideal that it be accessable through a database t
+- Since the lab data will need to be used in reporting, monitoring, and studies it's ideal that it be accessable through a database. This could be in the form of an OLAP database such as BigQuery, Snowflake, or Redshift. These options are ideal for scaling reporting and analytics via SQL however other options such as a managed Postgres database might be a better option if a compute cluster and query optimization, such as those offered by the three OLAP DBs, isn't needed.
 
 ### Workflow
-- Scheduling
- - Airflow
-- Modeling
- - dbt (data build tool)
+- Other elements of the data pipeline would include scheduling and model execution through tools like Airflow or dbt (data build tool) respectively. 
+
+4. How will you ensure that the Excel template has the correct format?
+- One could check formatting by checking that the column headers are equivalent to, such as the assertion on line 78, but this does not take into account spelling errors or cells that aren't in the expected postion for the `read_csv` method. 
+
+5. What data QC analyses will you pursue or build? How will you provide visibility into data QC for the team? What will happen if a sample on a qPCR plate or an entire qPCR plate fails QC?
+- Looking at the data in aggregate you could use anomoly detection methods or more simply a box plot where anything in the first or fourth quartile is flagged for additional inspection.
+- More than the data itself, you could monitor metadata on the files and the database in order to derive latency and completness metrics and thereby trust in the pipeline. 
+
+6. What constraints do you expect to face? How will you balance trade-offs between ensuring reliable, robust data ingestion and QC but enabling automated and quick processing times?
+- Since latency isn't an issue then reliability and robustness through redundancy is the preferred option. 
+
+7. How will you implement the process of updating the standard curve each week into your pipeline and script?
+- Equation coefficients can be called from a key-value store. The key-value for each coefficient can be updated via a schedule or event trigger.
+
+8. How can you expand the base pipeline for Covid-19 to include other qPCR targets such as influenza A and B?
+- If the additional targets adhere to the same standards and calcutions then the tests could easily be added to the program. If test set varies between customers and accross time then it would be efficient to parameterize the tests and associated calculations.
+
+9. How do you collaborate with the lab team and other engineers to build the pipeline? (Some key areas to explore are methods of communication between and within teams, visibility on requirements, working together on the same repository)
+- Methods of Communication: daily or weekly standup meetings, clear priorities, and project boundries
+- Visibility on Requirements: documentation on company wiki
+- Working Repo: use of templates for issues and commits along with good testing practices prior to merging to production
+
 
 ## Instructions
-
+```
 Take-home exercise:
 
 1. Write a Python function to parse the provided Excel template into a pandas dataframe.
@@ -107,7 +132,7 @@ visibility on requirements, working together on the same repository)
 
 ● What are the things we aren’t considering but should be thinking about based on
 everything you’ve heard throughout the interview process?
-
+```
 ## References
 
 - https://assets.thermofisher.com/TFS-Assets/LSG/brochures/CO28730-Crt-Tech-note_FLR.pdf
