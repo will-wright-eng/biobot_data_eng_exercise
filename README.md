@@ -1,6 +1,6 @@
 # Data Engineering Exercise for Biobot
 
-![biobot](https://github.com/william-cass-wright/biobot_data_eng_exercise/blob/master/images/logo.png)
+![biobot](https://github.com/william-cass-wright/biobot_data_eng_exercise/blob/main/images/logo.png)
 
 ## Table of Contents
 
