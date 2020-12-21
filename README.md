@@ -51,11 +51,11 @@ def main():
 
 3. Describe the tools and technologies you will use to ingest the lab data into the pipeline and store it into a cloud-hosted database. 
 
-### Extract
+__Extract__
 - Ideally the instrument software has an API and webhooks with well documented endpoints for extracting testing data. I haven't been in a lab in a few years but I think it's safe to say this is not an ideal assumption. The next best thing would be a LIMS that fits this criteria of API, webhooks, and documentation. If this is the case then the extraction process is building a vehicle for communicating with the instrument in a programatic way either via scheduled HTTP calls or with a simple webhook listener.
 - Since I'm most familar with python this is the language I would use for such a step. 
 
-### Transform
+__Transform__
 - The transformation step of this process is covered in the rest of the exercise. Assuming that the data provided is representative of what was extracted then pandas would be sufficient.
 - A few things I would add given more time:
 	- replace print statements with logging
@@ -64,10 +64,10 @@ def main():
 	- add edge case testing to account for expected variability in lab data
 	- orgaize code into class with OOP naming conventions
 
-### Load
+__Load__
 - Since the lab data will need to be used in reporting, monitoring, and studies it's ideal that it be accessable through a database. This could be in the form of an OLAP database such as BigQuery, Snowflake, or Redshift. These options are ideal for scaling reporting and analytics via SQL however other options such as a managed Postgres database might be a better option if a compute cluster and query optimization, such as those offered by the three OLAP DBs, isn't needed.
 
-### Workflow
+__Workflow__
 - Other elements of the data pipeline would include scheduling and model execution through tools like Airflow or dbt (data build tool) respectively. 
 
 4. How will you ensure that the Excel template has the correct format?
